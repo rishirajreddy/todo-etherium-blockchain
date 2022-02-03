@@ -121,6 +121,14 @@ App = {
         }
       },
 
+      //creating a task 
+      createTask: async() => {
+        App.setLoading(true);
+        const newTask = $("#newTask").val();
+        await App.todolist.createTask(newTask, {from: App.account});    //creates the task and fetching from --> blockchain account
+        window.location.reload();
+      },
+
       setLoading: (boolean) => {
           App.loading = boolean;
           const loader = $("#loader")
