@@ -1,0 +1,15 @@
+{
+    "_comment1": "Browser Sync File",
+    "_comment2": "Run this for the lite-server",
+    "_comment3": "Lite-server needs to know about a few directories to run on the client-side",
+
+    "server": {
+      "baseDir": [
+        "./src",
+        "./build/contracts"
+      ],
+      "routes": {
+        "/vendor": "./node_modules"
+      }
+    }
+  }
