@@ -108,7 +108,7 @@ App = {
         $newtaskTemplate.find('input')
                         .prop('name', taskId)
                         .prop('checked', taskCompleted) 
-                        
+                        .on('click', App.toggleCompletion)
         //place tasks in the correct list
         if(taskCompleted) {
             $('#completedTaskList').append($newtaskTemplate)
@@ -126,6 +126,14 @@ App = {
         App.setLoading(true);
         const newTask = $("#newTask").val();
         await App.todolist.createTask(newTask, {from: App.account});    //creates the task and fetching from --> blockchain account
+        window.location.reload();
+      },
+
+      //toggling task completion
+      toggleCompletion: async(e) => {
+        App.setLoading(true);
+        const taskId = e.target.name;
+        await App.todolist.toggleCompleted(taskId, {from:App.account});
         window.location.reload();
       },
 

@@ -40,4 +40,14 @@ contract('TodoList',(accounts) => {
         assert.equal(event.completed, false);
 
     })
+
+    //test for toggling task completion
+    it ('toggles tasks completion', async () => {
+        const result = await this.todolist.toggleCompleted(1)
+        const task = await this.todolist.tasks(1)
+        assert.equal(task.completed, true)
+        const event = result.logs[0].args 
+        assert.equal(event.id.toNumber(), 1)
+        assert.equal(event.completed, true )
+      })
 })

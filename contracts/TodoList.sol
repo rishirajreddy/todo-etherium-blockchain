@@ -26,6 +26,12 @@ contract TodoList {
         bool completed
     );
 
+    //event for task completion
+    event TaskCompleted(
+        uint id,
+        bool completed
+    );
+
     //Called when the smart contract runs for the first time
     constructor() public{
         createTask("Welcome to my first blockchain project");
@@ -36,5 +42,13 @@ contract TodoList {
         taskCount++;
         tasks[taskCount] = Task(taskCount, _content, false);
         emit TaskCreated(taskCount, _content, false);
+    }
+
+    //Listing the completed tasks into the completed list
+    function toggleCompleted(uint _id) public {
+        Task memory _task = tasks[_id];            //_task variabke is local variable
+        _task.completed = !_task.completed;          //if taskcompleted --> set true else set false
+        tasks[_id] = _task;                        
+        emit TaskCompleted(_id, _task.completed);
     }
 }
